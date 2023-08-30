@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            text-align: center;
+            margin-top: 100px;
+        }
+    </style>
+</head>
+<body>
+    <input type="text" id="myInput">
+    <button id="myButton" onclick="alt()">Submit</button>
+    <p id="output"></p>
+</body>
+<script>
+    function alt(){
+        let v1=document.getElementById("myInput").value;
+        let display=document.getElementById("output");
+        let showalert = display.innerText="Entered Value is :- "+v1;
+        alert (showalert);
+    }
+</script>
+</html>
