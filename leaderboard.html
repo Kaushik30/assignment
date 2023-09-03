@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>leaderboard</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Oswald:wght@500;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rowdies:wght@300;400;700&display=swap');
+
+        * {
+            font-size: 25px;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 600;
+
+
+        }
+
+        #div1 {
+            /* border: 1px solid black; */
+            height: 100px;
+            width: 500px;
+            display: flex;
+            margin: auto;
+            justify-content: space-between;
+        }
+
+        #min,
+        #max {
+            /* border: 1px solid black; */
+            width: 25%;
+        }
+
+        #min>div:nth-child(1),
+        #max>div:nth-child(1) {
+            border: 2px solid black;
+            width: 100%;
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30px;
+
+        }
+
+        #min>div:nth-child(2),
+        #max>div:nth-child(2) {
+            text-align: center;
+        }
+
+        #min>div:nth-child(1) {
+            background-color: red;
+        }
+
+        #max>div:nth-child(1) {
+            background-color: green;
+        }
+
+        #div2 {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            align-items: center;
+            margin: auto;
+            margin-top: 20px;
+            width: 400px;
+        }
+
+        #div2>div:nth-child(2) {
+            border: 2px solid black;
+            background-color: lightgray;
+            width: 400px;
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #div3 {
+            width: 250px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            justify-items: center;
+            gap: 30px;
+            margin: auto;
+            margin-top: 20px;
+        }
+
+        #div3>div {
+            border: 1px solid black;
+            height: 60px;
+            width: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #div4 {
+            background-color: black;
+            color: white;
+            width: 250px;
+            height: 60px;
+            margin: auto;
+            margin-top: 20px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+        }
+
+        .G {
+            background-color: rgb(108, 157, 73);
+        }
+
+        .O {
+            background-color: rgb(248, 98, 43);
+        }
+
+        .P {
+            background-color: purple;
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="div1">
+        <div id="min">
+            <div id="minscr">5</div>
+            <div>MIN</div>
+        </div>
+        <div id="max">
+            <div id="maxscr">50</div>
+            <div>MAX</div>
+
+        </div>
+    </div>
+    <div id="div2">
+        <div>SCORE</div>
+        <div id="display"></div>
+    </div>
+    <div id="div3">
+        <div class="G">1</div>
+        <div class="O">2</div>
+        <div class="G">3</div>
+        <div class="O">4</div>
+        <div class="O">5</div>
+        <div class="O">6</div>
+        <div class="G">7</div>
+        <div class="O">8</div>
+        <div class="G">9</div>
+        <div id="blank" style="border: none;"></div>
+        <div class="P">0</div>
+    </div>
+    <div id="div4">
+        ENTER
+    </div>
+</body>
+<script>
+    // let min = document.getElementById("minscr").innerText;
+    let min = document.getElementById("minscr");
+    let max = document.getElementById("maxscr");
+    let display = document.getElementById("display");
+    let number = document.querySelectorAll("#div3>div");
+    let enter = document.getElementById("div4");
+    let str = "";
+    let count = 0;
+
+    for (let i = 0; i < number.length; i++) {
+        number[i].addEventListener("click", function () {
+            str += number[i].innerText;
+            display.innerText = str;
+        })
+    }
+
+
+    enter.addEventListener("click", function () {
+        // if (count > 0 && str.length == 0) {
+        if (+str > min.innerText && +str < max.innerText) {
+            display.innerText = "Entered Score is not MIN nor MAX";
+            str = "";
+        }
+        else if (+str < min.innerText) {
+            min.innerText = str;
+            str = "";
+        }
+        else if (+str > max.innerText) {
+            max.innerText = str;
+            str = "";
+        }
+        else if (+str == min.innerText) {
+            display.innerText = "Entered Score is Alredy MIN";
+            str = "";
+        }
+        else if (+str == max.innerText) {
+            display.innerText = "Entered Score is Alredy MAX";
+            str = "";
+        }
+        // }
+        count++;
+
+    })
+</script>
+
+</html>
