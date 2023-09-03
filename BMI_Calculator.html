@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BMI Calculator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans&family=Oswald:wght@500;700&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Rowdies:wght@300;400;700&display=swap');
+
+
+        * {
+            font-size: 20px;
+            font-family: 'Poppins', sans-serif;
+
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Check your BMI</h1>
+    <h3>Enter your weight and hight below to check your BMI result</h3>
+    <p>Put your weight here in KG</p>
+    <input type="number" placeholder="weight in KG" id="inp1">
+    <p>Put your height here in CM</p>
+    <input type="number" placeholder="height in CM" id="inp2">
+    <br>
+    <button id="btn">Calculate BMI</button>
+    <h3 id="display"></h3>
+
+</body>
+<script>
+    let inp1 = document.getElementById("inp1");
+    let inp2 = document.getElementById("inp2");
+    let btn = document.getElementById("btn");
+    let dis = document.getElementById("display");
+    let bmi = 0;
+
+
+    btn.addEventListener("click", function () {
+
+        bmi = +inp1.value / ((+inp2.value / 100) * (+inp2.value / 100));
+        console.log(bmi);
+
+        bmi = bmi.toFixed(1);
+
+        if (bmi <= 18.4) {
+            dis.innerText = "Your BMI is " + bmi + " which means You are Under weight"
+        }
+        else if (bmi >= 18.5 && bmi <= 24.9) {
+            dis.innerText = "Your BMI is " + bmi + " which means You are Normal weight"
+        }
+        else if (bmi >= 25 && bmi <= 29.9) {
+            dis.innerText = "Your BMI is " + bmi + " which means You are Over weight"
+        }
+        else if (bmi >= 30) {
+            dis.innerText = "Your BMI is " + bmi + " which means You are Obese"
+        }
+    })
+
+</script>
+
+</html>
