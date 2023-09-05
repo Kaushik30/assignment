@@ -1,1 +1,5 @@
 /* Fill CSS here */
+
+td, tr,th, table, tbody,thead{
+    border: 1px solid black;
+}
