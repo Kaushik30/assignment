@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Book Store</title>
+  </head>
+  <body>
+    <h1>All book-related activities are running in the background.</h1>
+    <h2>Please Check Inspact Console.</h2>
+  </body>
+  <script>
+    function Author(name, birthYear, nationality) {
+      this.name = name;
+      this.birthYear = birthYear;
+      this.nationality = nationality;
+    }
+
+    function Book(title, author, genre, price) {
+      this.title = title;
+      this.author = author;
+      this.genre = genre;
+      this.price = price;
+    }
+
+    Book.prototype.getBookInfo = function () {
+      console.log(`Title: ${this.title}`);
+      console.log(`Author: ${this.author.name}`);
+      console.log(`Genre: ${this.genre}`);
+      console.log(`Price: $${this.price}`);
+      console.log("-----------------------");
+    };
+
+    let author1 = new Author("J.K. Rowling", 1965, "British");
+    let author2 = new Author("MIcle Rock", 1978, "Tokiyo");
+
+    let book1 = new Book(
+      "Harry Potter and the Sorcerer's Stone",
+      author1,
+      "Fantasy",
+      12.99
+    );
+    let book2 = new Book("Gravity", author2, "Space", 9.99);
+
+    let bookstore = [book1, book2];
+
+    for (let book of bookstore) {
+      book.getBookInfo();
+    }
+  </script>
+</html>
