@@ -46,6 +46,16 @@
         }
         return total;
     }
+
+    function checkActive(account){
+        let arr = [];
+        for(let acc of account){
+            if(acc.active){
+                arr.push(acc.name);
+            }
+        }
+        return arr;
+    }
     
 
     let kaushikAccount = new BankAccount(12345, "Kaushik", "Saving", 333333);
@@ -56,8 +66,11 @@
 
     // kaushikAccount.deposit(4000);
     // kaushikAccount.withdraw(4000);
+    batmanAccount.active=false;
+
     let arr =[kaushikAccount,kevinAccount,batmanAccount,thorAccount,ironmanAccount];
-    console.log(getTotalBalance(arr));
+    console.log(`Total Balance of Our Bank is Rs.`,getTotalBalance(arr));
+    console.log(`This ${checkActive(arr).length} Person's Account is Active`,checkActive(arr));
 
     // console.log(kaushikAccount)
     // console.log(kevinAccount)
