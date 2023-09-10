@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bank Account Management</title>
+</head>
+<body>
+    <h1>All Account Log process is been running in background</h1>
+</body>
+<script>
+    function BankAccount (accountNumber, name, type, balance){
+
+        this.accountNumber =accountNumber
+        this.name=name
+        this.type=type
+        this.balance=balance
+        this.active=true
+        this.deposit=function(depoamt){
+            if(depoamt>0){
+                this.balance+=depoamt;
+                console.log(`Deposit of Rs.${depoamt}/- is Succesfully Done. in ${this.name}'s Account.`);
+            }
+            else{
+                console.log(`Invalid deposit amount`);
+            }
+        }
+        this.withdraw=function(withdrawamt){
+            if(withdrawamt>0 && this.active==true && withdrawamt<=this.balance){
+                this.balance-=withdrawamt;
+                console.log(`Withdraw of Rs.${withdrawamt}/- is Succesfully Done. From ${this.name}'s Account.`);
+            }
+            else{
+                console.log(`Invalid withdrawl amount`);
+            }
+        }
+
+    };
+
+    function getTotalBalance(account){
+        let total=0;
+        for(let acc of account){
+            if(acc.active){
+                total+=acc.balance;
+            }
+        }
+        return total;
+    }
+    
+
+    let kaushikAccount = new BankAccount(12345, "Kaushik", "Saving", 333333);
+    let kevinAccount = new BankAccount(23415, "kevin", "Current", 4455);
+    let batmanAccount = new BankAccount(54231, "batman", "Salary", 0);
+    let thorAccount = new BankAccount(78906, "thor", "Saving", 1000);
+    let ironmanAccount = new BankAccount(60843, "ironman", "Current", 2000);
+
+    // kaushikAccount.deposit(4000);
+    // kaushikAccount.withdraw(4000);
+    let arr =[kaushikAccount,kevinAccount,batmanAccount,thorAccount,ironmanAccount];
+    console.log(getTotalBalance(arr));
+
+    // console.log(kaushikAccount)
+    // console.log(kevinAccount)
+    // console.log(batmanAccount)
+    // console.log(thorAccount)
+    // console.log(ironmanAccount)
+</script>
+</html>
