@@ -17,8 +17,8 @@
   </head>
   <body>
     <div id="display">
-      <div id="hours">0</div>
-      <div id="menite">0</div>
+      <div id="hours"></div>
+      <div id="menite"></div>
       <div id="second">0</div>
     </div>
     <button id="start">Start</button>
@@ -68,9 +68,9 @@
       clearInterval(running);
       second1 = 0;
       second.textContent = second1;
-      menite1 = 0;
+      menite1 = null;
       menite.textContent = menite1;
-      hours1 = 0;
+      hours1 = null;
       hours.textContent = hours1;
     });
   </script>
