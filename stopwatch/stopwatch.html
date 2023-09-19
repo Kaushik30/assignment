@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Stopwatch</title>
+    <style>
+      * {
+        text-align: center;
+        margin: 10px;
+      }
+      #display {
+        display: flex;
+        justify-content: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="display">
+      <div id="hours">0</div>
+      <div id="menite">0</div>
+      <div id="second">0</div>
+    </div>
+    <button id="start">Start</button>
+    <button id="pause">Pause</button>
+    <button id="reset">Reset</button>
+  </body>
+  <script>
+    let second = document.getElementById("second");
+    let start = document.getElementById("start");
+    let pause = document.getElementById("pause");
+    let reset = document.getElementById("reset");
+    let menite = document.getElementById("menite");
+    let hours = document.getElementById("hours");
+    let val = false;
+    let second1 = 0;
+    let menite1 = 0;
+    let hours1 = 0;
+    let running;
+
+    function count() {
+      ++second1;
+      second.textContent = second1;
+      if (second1 >= 60) {
+        second1 = 0;
+        menite1++;
+        menite.textContent = menite1;
+      }
+      if (menite1 >= 60) {
+        menite1 = 0;
+        hours1++;
+        hours.textContent = hours1;
+      }
+    }
+
+    start.addEventListener("click", function () {
+      if (val === false) {
+        val = true;
+        running = setInterval(count, 1);
+      }
+    });
+    pause.addEventListener("click", function () {
+      val = false;
+      clearInterval(running);
+    });
+    reset.addEventListener("click", function () {
+      val = false;
+      clearInterval(running);
+      second1 = 0;
+      second.textContent = second1;
+      menite1 = 0;
+      menite.textContent = menite1;
+      hours1 = 0;
+      hours.textContent = hours1;
+    });
+  </script>
+</html>
