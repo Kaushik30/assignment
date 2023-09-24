@@ -4,18 +4,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Local Storage</title>
+    <style>
+        th,
+        td,
+        table {
+            border: 1px solid black;
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body>
     <h3>Add your name and age in Local Storage</h3>
     <input type="text" id="name" placeholder="Enter your name"><br>
     <input type="number" id="age" placeholder="Enter your age"><br>
-    <button onclick="store()">Submit</button>
+    <button onclick="store()">Submit</button><br>
+    <button onclick="retrieve()">Retrieve</button><br>
+    <table>
+        <thead>
+            <th>Sr.</th>
+            <th>User Name</th>
+            <th>User Age</th>
+        </thead>
+        <tbody>
+            <!--I am appending data here from script-->
+        </tbody>
+    </table>
 </body>
 <script>
     let nameInput = document.getElementById("name");
     let ageInput = document.getElementById("age");
+    let display = document.getElementById("display");
+    let tableBody = document.querySelector("tbody");
+    let srNumber = 1;
     function store() {
         localStorage.setItem("UserName", nameInput.value);
         localStorage.setItem("UserAge", ageInput.value);
@@ -25,7 +47,21 @@
         }
         nameInput.value = "";
         ageInput.value = "";
+    }
+    function retrieve() {
+        let userName = localStorage.getItem("UserName");
+        let userAge = localStorage.getItem("UserAge");
+        let tr = document.createElement("tr");
+        let td1 = document.createElement("td");
+        let td2 = document.createElement("td");
+        let td3 = document.createElement("td");
+        td1.textContent = srNumber++;
+        td2.textContent = userName;
+        td3.textContent = userAge;
 
+
+        tr.append(td1, td2, td3);
+        tableBody.appendChild(tr);
     }
 
 </script>
