@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h3>Add your name and age in Local Storage</h3>
+    <input type="text" id="name" placeholder="Enter your name"><br>
+    <input type="number" id="age" placeholder="Enter your age"><br>
+    <button onclick="store()">Submit</button>
+</body>
+<script>
+    let nameInput = document.getElementById("name");
+    let ageInput = document.getElementById("age");
+    function store() {
+        localStorage.setItem("UserName", nameInput.value);
+        localStorage.setItem("UserAge", ageInput.value);
+        if (nameInput.value != "" && ageInput.value != "") {
+
+            alert("User Data added successfully!")
+        }
+        nameInput.value = "";
+        ageInput.value = "";
+
+    }
+
+</script>
+
+</html>
