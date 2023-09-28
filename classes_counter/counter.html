@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <style>
+        * {
+            text-align: center;
+            font-size: 15px;
+        }
+
+        #start-stop,
+        #increment,
+        #decrement {
+            margin-top: 20px;
+        }
+
+        #count {
+            margin: auto;
+            margin-top: 20px;
+            border: 1px solid black;
+            border-radius: 10px;
+            width: 300px;
+            font-size: 30px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="count">0</div>
+    <button id="start-stop">Start/Stop</button>
+    <button id="increment">Increment (+)</button>
+    <button id="decrement">Decrement (-)</button>
+    <button id="reset">Reset</button>
+
+</body>
+<script>
+    class Counter {
+        constructor() {
+            this.count = 0;
+            this.interval = null;
+            this.isAutomatic = true;
+        }
+
+        start() {
+            if (this.interval) {
+                return;
+            }
+
+            this.interval = setInterval(() => {
+                this.count++;
+                this.render();
+            }, 1000);
+        }
+
+        stop() {
+            if (!this.interval) {
+                return;
+            }
+
+            clearInterval(this.interval);
+            this.interval = null;
+        }
+
+        increment() {
+            this.count++;
+            this.render();
+            clearInterval(this.interval);
+            this.interval = null;
+            counter.isAutomatic = true;
+        }
+
+        decrement() {
+            this.count--;
+            this.render();
+            clearInterval(this.interval);
+            this.interval = null;
+            counter.isAutomatic = true;
+        }
+
+        reset() {
+            this.count = 0;
+            this.render();
+            clearInterval(this.interval);
+            this.interval = null;
+            counter.isAutomatic = true;
+        }
+
+        render() {
+            document.getElementById('count').innerHTML = this.count;
+        }
+    }
+
+    const counter = new Counter();
+
+    // Start and stop button
+    document.getElementById('start-stop').addEventListener('click', () => {
+        if (counter.isAutomatic) {
+            if (counter.count < 0) {
+                counter.count = 0;
+            }
+            counter.start();
+            counter.isAutomatic = false;
+        } else {
+            counter.stop();
+            counter.isAutomatic = true;
+        }
+    });
+
+    // Increment and decrement buttons
+    document.getElementById('increment').addEventListener('click', counter.increment.bind(counter));
+    document.getElementById('decrement').addEventListener('click', counter.decrement.bind(counter));
+    document.getElementById('reset').addEventListener('click', counter.reset.bind(counter));
+
+    // Render initial count
+    counter.render();
+
+</script>
+
+</html>
