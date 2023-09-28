@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2>All the lower string activity was going on in background, please see console part</h2>
+
+</body>
+<script>
+    let input = ["MA", "SA", "I", "SCH", "OOL"];
+    let output = [];
+
+    let lowerChar = (char) => {
+        return char.toLowerCase(char)
+    }
+
+    let lowerWord = (word) => {
+        let bag = "";
+        for (let i of word) {
+            bag += lowerChar(i);
+        }
+        return bag;
+    }
+
+    for (let i in input) {
+        output[i] = lowerWord(input[i]);
+    }
+    console.log(output)
+
+
+</script>
+
+</html>
