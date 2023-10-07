@@ -3,132 +3,98 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <title>Custom Stack</title>
+    <title>Custom Array</title>
     <style>
       body {
-          font-family: Arial, sans-serif;
-          background-color: #f0f0f0;
-        margin: 0;
-        padding: 0;
-      }
-
-      .stack-container {
-        background-color: #fff;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        margin: 20px auto;
-        max-width: 600px;
-        padding: 20px;
         text-align: center;
       }
-
-      h1 {
-        font-size: 24px;
-      }
-
-      .stack-operations {
-        margin-top: 20px;
-      }
-
-      button {
-        background-color: #007bff;
-        border: none;
-        color: #fff;
-        cursor: pointer;
-        font-size: 16px;
-        margin: 5px;
-        padding: 10px 20px;
-        transition: background-color 0.3s;
-      }
-
-      button:hover {
-        background-color: #0056b3;
-      }
-
-      .stack-output {
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        margin-top: 20px;
-        padding: 10px;
-        text-align: left;
-      }
-
-      .stack-output pre {
-        margin: 0;
+      #input {
+        margin: 15px;
+        width: 20%;
       }
     </style>
   </head>
   <body>
-    <div class="stack-container">
-      <h1>Custom Stack</h1>
-      <div class="stack-operations">
-        <button id="pushBtn">Push</button>
-        <button id="popBtn">Pop</button>
-        <button id="topBtn">Top</button>
-        <button id="printBtn">Print</button>
-        <button id="printReverseBtn">Print Reverse</button>
-      </div>
-      <div class="stack-output" id="stackOutput"></div>
-    </div>
+    <h1>Make Your Own Custom Array</h1>
+    <input type="text" id="input" /><br />
+    <button onclick="push()">Push</button>
+    <button onclick="pop()">Pop</button>
+    <button onclick="last()">Last Element</button>
+    <button onclick="togglePrintArray()" id="print">Print Array</button>
+    <button onclick="size()">Length of Array</button><br />
+    <div id="output">Array Content :</div>
+    <div id="length">Array Length : 0</div>
+    <div id="lastElem">Last Element :</div>
   </body>
   <script>
-    // Custom Array constructor
-    function CustomArray() {
-      this.size = arguments.length; // Set the size property based on the number of arguments
+    const input = document.getElementById("input");
+    const output = document.getElementById("output");
+    const length = document.getElementById("length");
+    const lastElem = document.getElementById("lastElem");
+    const print = document.getElementById("print");
+    let flag = true;
+    class CustomArray {
+      constructor() {
+        this.data = [];
+      }
 
-      // Add the arguments as key-value pairs to the Array object
-      for (let i = 0; i < arguments.length; i++) {
-        this[i] = arguments[i];
+      push(element) {
+        console.log(input.value);
+        input.value = "";
+        this.data.push(element);
+      }
+
+      pop() {
+        if (this.data == 0) {
+          return undefined;
+        }
+        return this.data.pop();
+      }
+
+      top(ele) {
+        if (this.data == 0) {
+          return `Stack is Empty`;
+        }
+        lastElem.innerText = "";
+        lastElem.append(`Last Element : ${this.data[this.data.length - 1]}`);
+      }
+      printRF() {
+        if (flag == true) {
+          output.innerText = "";
+          output.append(`Array Content : ${this.data.join(",")}`);
+          print.innerText = `Print Reverse Array (<=)`;
+          flag = false;
+        } else {
+          output.innerText = "";
+          output.append(`Array Content : ${this.data.reverse().join(",")}`);
+          console.log(`Array Content : ${this.data.reverse().join(",")}`);
+          print.innerText = `Print Forwad Array (=>)`;
+          flag = true;
+        }
+      }
+
+      size() {
+        length.innerText = "";
+        length.append(`Array Length : ${this.data.length}`);
       }
     }
-
-    // Define custom methods using the prototype property
-    CustomArray.prototype = {
-      push: function (element) {
-        this[this.size] = element; // Add the element at the end
-        this.size++; // Increase the size
-      },
-      pop: function () {
-        if (this.size > 0) {
-          const removedElement = this[this.size - 1]; // Remove the element from the end
-          delete this[this.size - 1];
-          this.size--; // Decrease the size
-          return removedElement;
-        } else {
-          return undefined; // Stack is empty
-        }
-      },
-      top: function () {
-        if (this.size > 0) {
-          return this[this.size - 1]; // Return the element at the last index
-        } else {
-          return undefined; // Stack is empty
-        }
-    },
-    print: function () {
-        const elements = [];
-        for (let i = 0; i < this.size; i++) {
-          elements.push(this[i]);
-        }
-        console.log(`[${elements.join(",")}]`); // Print the elements in a single line
-      },
-      printReverse: function () {
-        const elements = [];
-        for (let i = this.size - 1; i >= 0; i--) {
-          elements.push(this[i]);
-        }
-        console.log(`[${elements.join(",")}]`); // Print the elements in reverse order
-      },
-    };
-
-    // Example usage:
-    const stack = new CustomArray(1, 2, 3, 4);
-
-    stack.push(5);
-    stack.pop();
-    console.log(stack.top()); // Should print 4
-    stack.print(); // Should print [1,2,3,4]
-    stack.printReverse(); // Should print [4,3,2,1]
-    console.log(stack.size); // Should print 4
+    const customArr = new CustomArray();
+    function push() {
+      if (input.value !== "") {
+        customArr.push(input.value);
+      }
+    }
+    function togglePrintArray() {
+      customArr.printRF();
+    }
+    function pop() {
+      customArr.pop();
+    }
+    function last() {
+      customArr.top();
+    }
+    function size() {
+      customArr.size();
+    }
   </script>
 </html>
