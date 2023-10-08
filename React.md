@@ -25,8 +25,8 @@ Answer - (6) - The two packages that you need to import for React to work with a
 
 Question - (7) - How do you add react to a web application?
 Answer - (7) - To add React to a web application, you need to create a new HTML file and add the following script tags to the head of the file: Then, you need to create a React component and render it to the DOM.
-For React - <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-For React DOM - <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+For React - <script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>;
+For React DOM - <script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>;
 
 Question - (8) - What is React.createElement?
 Answer - (8) - React.createElement is a function that creates a new React element. A React element is a lightweight description of what you want to render.
