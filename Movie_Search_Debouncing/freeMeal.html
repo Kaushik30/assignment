@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Free Meal</title>
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+      * {
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+        font-weight: 600;
+      }
+
+      body {
+        background-color: black;
+      }
+
+      #searchResult {
+        width: 500px;
+        font-size: 20px;
+        margin-top: 20px;
+        box-shadow: rgba(255, 255, 255, 0.8) 0px 5px 15px;
+      }
+
+      #display {
+        margin-top: 50px;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+      }
+
+      .card {
+        padding: 10px;
+        border-radius: 10px;
+        background-color: white;
+        box-shadow: rgba(255, 255, 255, 0.8) 0px 5px 15px,
+          rgba(0, 0, 0, 0.17) 0px -23px 25px 0px inset,
+          rgba(0, 0, 0, 0.15) 0px -36px 30px 0px inset,
+          rgba(0, 0, 0, 0.1) 0px -79px 40px 0px inset,
+          rgba(0, 0, 0, 0.06) 0px 2px 1px, rgba(0, 0, 0, 0.09) 0px 4px 2px,
+          rgba(0, 0, 0, 0.09) 0px 8px 4px, rgba(0, 0, 0, 0.09) 0px 16px 8px,
+          rgba(0, 0, 0, 0.09) 0px 32px 16px;
+        transition: transform 0.2s;
+      }
+
+      .card:hover {
+        transform: scale(1.02);
+      }
+
+      img {
+        margin-top: 10px;
+        box-shadow: rgba(0, 0, 0, 0.8) 0px 5px 15px;
+        border-radius: 10px;
+        width: 60%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <input
+      type="text"
+      id="searchResult"
+      placeholder="Search Your Food Here !"
+    /><br />
+    <div id="display"></div>
+  </body>
+  <script>
+    let searchFood = document.getElementById("searchResult");
+    let displayResult = document.getElementById("display");
+
+    function submitSearch() {
+      displayResult.textContent = "";
+      console.log(searchFood.value);
+      fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchFood.value}`
+        )
+        .then((res) => {
+          return res.json();
+        })
+        .then((resObj) => {
+          let foodList = resObj.meals;
+          displayFoodList(foodList);
+        })
+        .catch(() => {
+          console.log("error");
+        });
+
+    }
+
+    searchFood.addEventListener("input", () => {
+      submitSearch();
+    });
+
+    function displayFoodList(data) {
+      data.forEach(function (item) {
+        let foodCard = document.createElement("div");
+        foodCard.className = "card";
+        
+        let foodTitle = document.createElement("div");
+        foodTitle.textContent = `Food Name : ` + item.strMeal;
+
+        let foodImage = document.createElement("img");
+        foodImage.src = item.strMealThumb;
+        
+        foodCard.append(foodTitle, foodImage);
+        displayResult.append(foodCard);
+      });
+    }
+  </script>
+</html>
